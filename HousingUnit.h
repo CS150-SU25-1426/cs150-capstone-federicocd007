@@ -5,7 +5,7 @@
 #include <iostream>
 
 class HousingUnit {
-private:
+protected:
     int unitNumber;
     std::string tenantName;
     bool isOccupied;
@@ -16,19 +16,24 @@ public:
     HousingUnit();
     HousingUnit(int number, std::string tenant, bool occupied, double rent);
 
-    // Getters
+    // Virtual destructor for proper cleanup of derived classes
+    virtual ~HousingUnit() {}
+
+    // Getters and Setters
     int getUnitNumber() const;
     std::string getTenantName() const;
     bool getIsOccupied() const;
     double getMonthlyRent() const;
 
-    // Setters
     void setTenantName(std::string tenant);
     void setIsOccupied(bool occupied);
     void setMonthlyRent(double rent);
 
-    // Operator Overloads
-    bool operator==(const HousingUnit& other) const;
+    // Virtual print function for polymorphism
+    virtual void print(std::ostream& os) const;
+
+    // Operator overloads
+    virtual bool operator==(const HousingUnit& other) const;
     friend std::ostream& operator<<(std::ostream& os, const HousingUnit& unit);
 };
 

@@ -1,14 +1,21 @@
 #include "HousingUnitList.h"
 #include <iostream>
 
-void HousingUnitList::addUnit(const HousingUnit& unit) {
+HousingUnitList::~HousingUnitList() {
+    for (auto u : units) {
+        delete u;
+    }
+}
+
+void HousingUnitList::addUnit(HousingUnit* unit) {
     units.push_back(unit);
 }
 
-bool HousingUnitList::editUnit(int unitNumber, const HousingUnit& updatedUnit) {
-    for (auto& u : units) {
-        if (u.getUnitNumber() == unitNumber) {
-            u = updatedUnit;
+bool HousingUnitList::editUnit(int unitNumber, HousingUnit* updatedUnit) {
+    for (size_t i = 0; i < units.size(); ++i) {
+        if (units[i]->getUnitNumber() == unitNumber) {
+            delete units[i];
+            units[i] = updatedUnit;
             return true;
         }
     }
@@ -17,7 +24,8 @@ bool HousingUnitList::editUnit(int unitNumber, const HousingUnit& updatedUnit) {
 
 bool HousingUnitList::deleteUnit(int unitNumber) {
     for (auto it = units.begin(); it != units.end(); ++it) {
-        if (it->getUnitNumber() == unitNumber) {
+        if ((*it)->getUnitNumber() == unitNumber) {
+            delete *it;
             units.erase(it);
             return true;
         }
@@ -31,15 +39,18 @@ void HousingUnitList::showAllUnits() const {
         return;
     }
     for (const auto& unit : units) {
-        std::cout << unit << std::endl;
+        std::cout << *unit << std::endl;
     }
 }
 
-// Operator overloads
-HousingUnit& HousingUnitList::operator[](int index) {
+HousingUnit* HousingUnitList::operator[](int index) {
     return units[index];
 }
 
 bool HousingUnitList::operator==(const HousingUnitList& other) const {
-    return this->units == other.units;
+    if (units.size() != other.units.size()) return false;
+    for (size_t i = 0; i < units.size(); ++i) {
+        if (!(*units[i] == *other.units[i])) return false;
+    }
+    return true;
 }

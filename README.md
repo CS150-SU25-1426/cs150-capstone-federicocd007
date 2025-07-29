@@ -22,7 +22,7 @@ This C++ application is part of a capstone project designed to manage residentia
 
 **Challenges:** Keeping class responsibilities clear — keeping rent and tenant logic separate from potential future maintenance logic.
 
-**On Time**: As I am still catching up in the class, most of my deliverables are late right now.
+**On Time:** As I am still catching up in the class, most of my deliverables are late right now.
 
 **Future Work:** Add maintenance requests, lease duration, or monthly reports.
 
@@ -52,6 +52,28 @@ This C++ application models the management of a 12-unit nonprofit apartment buil
 
 **Challenges:** Designing a user-friendly menu that was still simple and console-based. Operator overloading logic for lists was initially unclear.
 
-**On Time**: As I am still catching up in the class, most of my deliverables are late right now.
+**On Time:** As I am still catching up in the class, most of my deliverables are late right now.
 
 **Future Improvements:** File storage, date handling, maintenance request tracking.
+
+## Phase 3: Inheritance & Expanded Inventory
+
+### New Features
+- `MaintenanceUnit`: A child class of `HousingUnit`, representing units undergoing repairs
+- Inherits all attributes from `HousingUnit`, with additional `maintenanceIssue`
+- Users can now add both regular and maintenance units from the menu
+- Updated operator overloads for printing maintenance-specific info
+
+### Resources Used
+- [cplusplus.com](https://cplusplus.com)
+- ChatGPT – guidance on inheritance and polymorphism in C++
+- [Stack Overflow](https://stackoverflow.com/questions/1306778/how-do-you-inherit-a-constructor-in-c)
+
+### Summary
+**What went well:** Inheritance let us avoid rewriting duplicate logic for maintenance units.
+
+**What was challenging:** Updating the menu system to distinguish between regular and maintenance units without duplicating input code.
+
+**On Time:** As I am still catching up in the class, most of my deliverables are late right now.
+
+**Could be improved:** Using pointers (`HousingUnit*`) and a true polymorphic approach to allow a single list to contain both types of units more cleanly.

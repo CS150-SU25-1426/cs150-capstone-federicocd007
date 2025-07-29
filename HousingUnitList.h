@@ -6,17 +6,18 @@
 
 class HousingUnitList {
 private:
-    std::vector<HousingUnit> units;
+    std::vector<HousingUnit*> units;
 
 public:
-    void addUnit(const HousingUnit& unit);
-    bool editUnit(int unitNumber, const HousingUnit& updatedUnit);
+    ~HousingUnitList();  // To delete pointers
+
+    void addUnit(HousingUnit* unit);
+    bool editUnit(int unitNumber, HousingUnit* updatedUnit);
     bool deleteUnit(int unitNumber);
     void showAllUnits() const;
 
-    // Operator overloads
-    HousingUnit& operator[](int index);  // Access by index
-    bool operator==(const HousingUnitList& other) const; // Compare lists
+    HousingUnit* operator[](int index);
+    bool operator==(const HousingUnitList& other) const;
 };
 
 #endif
