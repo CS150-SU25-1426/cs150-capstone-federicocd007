@@ -22,4 +22,36 @@ This C++ application is part of a capstone project designed to manage residentia
 
 **Challenges:** Keeping class responsibilities clear — keeping rent and tenant logic separate from potential future maintenance logic.
 
+**On Time**: As I am still catching up in the class, most of my deliverables are late right now.
+
 **Future Work:** Add maintenance requests, lease duration, or monthly reports.
+
+# Wesley House Unit Manager – Phase 2
+
+This C++ application models the management of a 12-unit nonprofit apartment building in San Diego. The app allows staff to add, edit, delete, and view unit information, including tenants and rent.
+
+## Features
+- Manage units with tenant name, occupancy status, and rent
+- Full menu-based UI for adding, editing, deleting, and viewing units
+- Vector-based list to manage up to 12 units
+- Operator overloading for usability
+
+## Files
+- `HousingUnit.h/cpp`: Represents a single housing unit
+- `HousingUnitList.h/cpp`: Manages a list of housing units
+- `main.cpp`: Interactive menu
+
+## Resources
+- [cplusplus.com](https://cplusplus.com)
+- GitHub Copilot
+- ChatGPT (structure and logic validation)
+- Stack Overflow
+
+## Summary
+**What went well:** Code modularity and testing in parts before integrating.
+
+**Challenges:** Designing a user-friendly menu that was still simple and console-based. Operator overloading logic for lists was initially unclear.
+
+**On Time**: As I am still catching up in the class, most of my deliverables are late right now.
+
+**Future Improvements:** File storage, date handling, maintenance request tracking.
