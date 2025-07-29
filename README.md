@@ -4,7 +4,7 @@
 
 # Wesley House Unit Manager (Phase 1)
 
-This C++ application is part of a capstone project designed to manage residential units in a nonprofit apartment building (e.g., Wesley House in San Diego). It tracks tenants, occupancy, and rent.
+This C++ application is part of a Capstone Project designed to manage residential units in a nonprofit apartment building - Wesley House in San Diego. It tracks tenants, occupancy, and rent.
 
 ## Files
 - `HousingUnit.h` – Class header file
@@ -20,9 +20,9 @@ This C++ application is part of a capstone project designed to manage residentia
 ## Summary
 **What went well:** Mapping the real-world idea of apartment management to class-based C++ code.
 
-**Challenges:** Keeping class responsibilities clear — keeping rent and tenant logic separate from potential future maintenance logic.
+**Challenges:** Keeping class responsibilities clear: keeping rent and tenant logic separate from potential future maintenance logic.
 
-**On Time:** As I am still catching up in the class, most of my deliverables are late right now.
+**On Time:** As I am still catching up in the class, most of my deliverables are 'late' right now.
 
 **Future Work:** Add maintenance requests, lease duration, or monthly reports.
 
@@ -70,10 +70,10 @@ This C++ application models the management of a 12-unit nonprofit apartment buil
 - [Stack Overflow](https://stackoverflow.com/questions/1306778/how-do-you-inherit-a-constructor-in-c)
 
 ### Summary
-**What went well:** Inheritance let us avoid rewriting duplicate logic for maintenance units.
+**What went well:** Inheritance allowed me to avoid rewriting duplicate logic for maintenance units.
 
 **What was challenging:** Updating the menu system to distinguish between regular and maintenance units without duplicating input code.
 
-**On Time:** As I am still catching up in the class, most of my deliverables are late right now.
+**On Time:** I think I am finally caught up, at least on this deliverable! :)
 
 **Could be improved:** Using pointers (`HousingUnit*`) and a true polymorphic approach to allow a single list to contain both types of units more cleanly.
