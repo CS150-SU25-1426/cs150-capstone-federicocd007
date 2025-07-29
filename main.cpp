@@ -4,7 +4,7 @@
 #include "MaintenanceUnit.h"
 
 void showMenu() {
-    std::cout << "\n***Wesley House Manager***\n\n";
+    std::cout << "***Wesley House Manager***\n\n";
     std::cout << "1. Add Unit\n";
     std::cout << "2. Edit Unit\n";
     std::cout << "3. Delete Unit\n";
@@ -45,7 +45,7 @@ int main() {
         switch (choice) {
         case 1: {
             int typeChoice;
-            std::cout << "1. Add Regular Unit\n2. Add Maintenance Unit\n";
+            std::cout << "\n1. Add Regular Unit\n2. Add Maintenance Unit\n";
             std::cin >> typeChoice;
             std::cin.ignore();
 
@@ -76,7 +76,7 @@ int main() {
         }
         case 2: {
             int unitNum;
-            std::cout << "Enter unit number to edit: ";
+            std::cout << "\nEnter unit number to edit: ";
             std::cin >> unitNum;
             std::cin.ignore();
 
@@ -112,7 +112,7 @@ int main() {
         }
         case 3: {
             int unitNum;
-            std::cout << "Enter unit number to delete: ";
+            std::cout << "\nEnter unit number to delete: ";
             std::cin >> unitNum;
             if (!manager.deleteUnit(unitNum))
                 std::cout << "Unit not found.\n";
@@ -122,10 +122,10 @@ int main() {
             manager.showAllUnits();
             break;
         case 5:
-            std::cout << "Goodbye!\n";
+            std::cout << "\nGoodbye!\n\n";
             break;
         default:
-            std::cout << "Invalid option.\n";
+            std::cout << "\nInvalid option.\n";
         }
 
     } while (choice != 5);
