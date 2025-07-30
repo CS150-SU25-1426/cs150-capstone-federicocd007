@@ -6,33 +6,27 @@
 
 class HousingUnit {
 protected:
-    int unitNumber;
+    std::string unitNumber;
     std::string tenantName;
     bool isOccupied;
     double monthlyRent;
 
 public:
-    // Constructors
     HousingUnit();
-    HousingUnit(int number, std::string tenant, bool occupied, double rent);
-
-    // Virtual destructor for proper cleanup of derived classes
+    HousingUnit(std::string number, std::string tenant, bool occupied, double rent);
     virtual ~HousingUnit() {}
 
-    // Getters and Setters
-    int getUnitNumber() const;
+    std::string getUnitNumber() const;
     std::string getTenantName() const;
     bool getIsOccupied() const;
     double getMonthlyRent() const;
 
+    void setUnitNumber(const std::string& num);
     void setTenantName(std::string tenant);
     void setIsOccupied(bool occupied);
     void setMonthlyRent(double rent);
 
-    // Virtual print function for polymorphism
     virtual void print(std::ostream& os) const;
-
-    // Operator overloads
     virtual bool operator==(const HousingUnit& other) const;
     friend std::ostream& operator<<(std::ostream& os, const HousingUnit& unit);
 };

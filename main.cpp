@@ -1,37 +1,87 @@
 #include <iostream>
+#include <iomanip>
+#include <limits>
+#include <sstream>
 #include "HousingUnit.h"
-#include "HousingUnitList.h"
 #include "MaintenanceUnit.h"
+#include "HousingUnitList.h"
 
-using namespace std;
+// Helper input functions
+std::string getString(const std::string& prompt) {
+    std::string input;
+    std::cout << prompt;
+    std::getline(std::cin, input);
+    return input;
+}
 
-void showMenu() {
-    cout << "***Wesley House Manager***\n\n";
-    cout << "1. Add Unit\n";
-    cout << "2. Edit Unit\n";
-    cout << "3. Delete Unit\n";
-    cout << "4. Show All Units\n";
-    cout << "5. Exit\n\n";
-    cout << "Select an option: ";
+int getValidatedInt(const std::string& prompt) {
+    std::string input;
+    int value;
+
+    while (true) {
+        std::cout << prompt;
+        std::getline(std::cin, input);
+        std::stringstream ss(input);
+
+        if ((ss >> value) && ss.eof()) {
+            return value;
+        }
+        std::cout << "Invalid input. Please enter a valid whole number.\n";
+    }
+}
+
+std::string getOptionalString(const std::string& prompt) {
+    std::string input;
+    std::cout << prompt;
+    std::getline(std::cin, input);
+
+    // Trim leading/trailing spaces
+    input.erase(0, input.find_first_not_of(" \t"));
+    input.erase(input.find_last_not_of(" \t") + 1);
+
+    return input;
+}
+
+double getValidatedDouble(const std::string& prompt) {
+    std::string input;
+    double value;
+
+    while (true) {
+        std::cout << prompt;
+        std::getline(std::cin, input);
+        std::stringstream ss(input);
+
+        if ((ss >> value) && ss.eof()) {
+            return value;
+        }
+        std::cout << "Invalid input. Please enter a valid number.\n";
+    }
+}
+
+std::string getValidatedString(const std::string& prompt) {
+    std::string input;
+
+    while (true) {
+        std::cout << prompt;
+        std::getline(std::cin, input);
+
+        // Trim leading/trailing whitespace
+        input.erase(0, input.find_first_not_of(" \t"));
+        input.erase(input.find_last_not_of(" \t") + 1);
+
+        if (!input.empty()) {
+            return input;
+        }
+
+        std::cout << "Invalid input. Please enter a non-empty string.\n";
+    }
 }
 
 HousingUnit createUnit() {
-    int unitNum;
-    string tenant;
-    bool occupied;
-    double rent;
-
-    cout << "Enter unit number: ";
-    cin >> unitNum;
-    cin.ignore();
-
-    cout << "Enter tenant name (or leave blank if vacant): ";
-    getline(cin, tenant);
-    occupied = !tenant.empty();
-
-    cout << "Enter monthly rent: ";
-    cin >> rent;
-
+    std::string unitNum = getString("Enter unit number (e.g. 112D): ");
+    std::string tenant = getOptionalString("Enter tenant name: (leave blank if vacant): ");
+    bool occupied = !tenant.empty();
+    double rent = getValidatedDouble("Enter monthly rent: ");
     return HousingUnit(unitNum, tenant, occupied, rent);
 }
 
@@ -40,99 +90,75 @@ int main() {
     int choice;
 
     do {
-        showMenu();
-        cin >> choice;
-        cin.ignore();
+        std::cout << "*****************************************\n";
+        std::cout << "**                                     **\n";
+        std::cout << "**   Wesley House - Property Manager   **\n";
+        std::cout << "**                                     **\n";
+        std::cout << "*****************************************\n";
+        std::cout << "1. Add Unit\n2. Edit Unit\n3. Delete Unit\n4. Show All Units\n0. Exit\n";
+        std::cout << "Choice: ";
+        std::cin >> choice;
+        std::cin.ignore(10000, '\n');
 
         switch (choice) {
         case 1: {
-            int typeChoice;
-            cout << "\n1. Add Regular Unit\n2. Add Maintenance Unit\n";
-            cin >> typeChoice;
-            cin.ignore();
+            std::cout << "1. Regular Unit\n2. Maintenance Unit\n";
+            int type;
+            std::cin >> type;
+            std::cin.ignore(10000, '\n');
 
-            if (typeChoice == 1) {
+            if (type == 1) {
                 HousingUnit* unit = new HousingUnit(createUnit());
                 manager.addUnit(unit);
-            } else if (typeChoice == 2) {
-                int unitNum;
-                string issue;
-                double rent;
-
-            cout << "Enter unit number: ";
-            cin >> unitNum;
-            cin.ignore();
-
-            cout << "Enter maintenance issue: ";
-            getline(cin, issue);
-   
-            cout << "Enter monthly rent: ";
-            cin >> rent;
-
-            HousingUnit* mu = new MaintenanceUnit(unitNum, issue, rent);
-                manager.addUnit(mu);
-            } else {
-                cout << "Invalid type.\n";
+            } else if (type == 2) {
+                std::string unitNum = getString("Enter unit number: ");
+                std::string issue = getString("Enter maintenance issue: ");
+                double rent = getValidatedDouble("Enter monthly rent: ");
+                HousingUnit* unit = new MaintenanceUnit(unitNum, issue, rent);
+                manager.addUnit(unit);
             }
             break;
         }
         case 2: {
-            int unitNum;
-            cout << "\nEnter unit number to edit: ";
-            cin >> unitNum;
-            cin.ignore();
+            std::string unitNum = getString("Enter unit number to edit: ");
+            std::cout << "1. Edit Regular\n2. Edit Maintenance\n";
+            int type;
+            std::cin >> type;
+            std::cin.ignore(10000, '\n');
 
-            int typeChoice;
-            cout << "1. Edit Regular Unit\n2. Edit Maintenance Unit\n";
-            cin >> typeChoice;
-            cin.ignore();
-
-            HousingUnit* updatedUnit = nullptr;
-
-            if (typeChoice == 1) {
-                updatedUnit = new HousingUnit(createUnit());
-            } else if (typeChoice == 2) {
-            string issue;
-            double rent;
-
-            cout << "Enter maintenance issue: ";
-            getline(cin, issue);
-
-            cout << "Enter monthly rent: ";
-            cin >> rent;
-
-            updatedUnit = new MaintenanceUnit(unitNum, issue, rent);
-        }
-
-            if (updatedUnit) {
-                if (!manager.editUnit(unitNum, updatedUnit)) {
-            cout << "Unit not found.\n";
-            delete updatedUnit;  // prevent memory leak
+            HousingUnit* updated = nullptr;
+            if (type == 1) {
+                updated = new HousingUnit(createUnit());
+            } else if (type == 2) {
+                std::string issue = getString("Enter issue: ");
+                double rent = getValidatedDouble("Enter rent: ");
+                updated = new MaintenanceUnit(unitNum, issue, rent);
             }
-        }
-        break;
+
+            if (!manager.editUnit(unitNum, updated)) {
+                std::cout << "Unit not found.\n";
+                delete updated;
+            }
+            break;
         }
         case 3: {
-            int unitNum;
-            cout << "\nEnter unit number to delete: ";
-            cin >> unitNum;
-            if (!manager.deleteUnit(unitNum))
-                cout << "Unit not found.\n";
+            std::string unitNum = getString("Enter unit number to delete: ");
+            if (!manager.deleteUnit(unitNum)) {
+                std::cout << "Unit not found.\n";
+            }
             break;
         }
         case 4:
-            cout << "\n";
             manager.showAllUnits();
-            cout << "\n";
             break;
-        case 5:
-            cout << "\nGoodbye!\n\n";
+        case 0:
+            std::cout << "Have a great day!\n";
             break;
         default:
-            cout << "\nInvalid option.\n";
+            std::cout << "Invalid option.\n";
         }
 
-    } while (choice != 5);
+    } while (choice != 0);
 
     return 0;
 }

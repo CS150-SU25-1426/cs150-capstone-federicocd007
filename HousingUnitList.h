@@ -9,11 +9,11 @@ private:
     std::vector<HousingUnit*> units;
 
 public:
-    ~HousingUnitList();  // To delete pointers
+    ~HousingUnitList();
 
     void addUnit(HousingUnit* unit);
-    bool editUnit(int unitNumber, HousingUnit* updatedUnit);
-    bool deleteUnit(int unitNumber);
+    bool editUnit(const std::string& unitNumber, HousingUnit* updatedUnit);
+    bool deleteUnit(const std::string& unitNumber);
     void showAllUnits() const;
 
     HousingUnit* operator[](int index);

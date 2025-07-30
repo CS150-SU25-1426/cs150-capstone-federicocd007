@@ -1,22 +1,24 @@
 #include "HousingUnit.h"
 
-HousingUnit::HousingUnit() : unitNumber(0), tenantName(""), isOccupied(false), monthlyRent(0.0) {}
+HousingUnit::HousingUnit()
+    : unitNumber(""), tenantName(""), isOccupied(false), monthlyRent(0.0) {}
 
-HousingUnit::HousingUnit(int number, std::string tenant, bool occupied, double rent)
+HousingUnit::HousingUnit(std::string number, std::string tenant, bool occupied, double rent)
     : unitNumber(number), tenantName(tenant), isOccupied(occupied), monthlyRent(rent) {}
 
-int HousingUnit::getUnitNumber() const { return unitNumber; }
+std::string HousingUnit::getUnitNumber() const { return unitNumber; }
 std::string HousingUnit::getTenantName() const { return tenantName; }
 bool HousingUnit::getIsOccupied() const { return isOccupied; }
 double HousingUnit::getMonthlyRent() const { return monthlyRent; }
 
+void HousingUnit::setUnitNumber(const std::string& num) { unitNumber = num; }
 void HousingUnit::setTenantName(std::string tenant) { tenantName = tenant; }
 void HousingUnit::setIsOccupied(bool occupied) { isOccupied = occupied; }
 void HousingUnit::setMonthlyRent(double rent) { monthlyRent = rent; }
 
 void HousingUnit::print(std::ostream& os) const {
-    os << "Unit " << unitNumber << " | Tenant: "
-       << (isOccupied ? tenantName : "Vacant")
+    os << "Unit " << unitNumber << " | "
+       << (isOccupied ? "Tenant: " + tenantName : "Vacant")
        << " | Rent: $" << monthlyRent;
 }
 

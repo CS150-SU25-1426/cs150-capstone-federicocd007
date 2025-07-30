@@ -9,13 +9,12 @@ private:
 
 public:
     MaintenanceUnit();
-    MaintenanceUnit(int unitNumber, std::string issue, double rent);
+    MaintenanceUnit(std::string unitNumber, std::string issue, double rent);
     ~MaintenanceUnit() override {}
 
     void setMaintenanceIssue(const std::string& issue);
     std::string getMaintenanceIssue() const;
 
-    // Override print method
     void print(std::ostream& os) const override;
 };
 

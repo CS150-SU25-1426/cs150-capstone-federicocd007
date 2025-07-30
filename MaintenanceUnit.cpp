@@ -6,7 +6,7 @@ MaintenanceUnit::MaintenanceUnit()
     tenantName = "N/A";
 }
 
-MaintenanceUnit::MaintenanceUnit(int unitNumber, std::string issue, double rent)
+MaintenanceUnit::MaintenanceUnit(std::string unitNumber, std::string issue, double rent)
     : HousingUnit(unitNumber, "N/A", false, rent), maintenanceIssue(issue) {}
 
 void MaintenanceUnit::setMaintenanceIssue(const std::string& issue) {
